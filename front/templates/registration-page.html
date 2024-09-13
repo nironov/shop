@@ -8,22 +8,20 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="usernameField" class="form-label">{{ form.username.label }}</label>
-                        <input type="text" class="form-control" id="usernameField" placeholder="username...">
+                        <div>{{ form.username.label }}</div>
+                        <div>{{ form.username }}</div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">{{ form.email.label }}</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        <div>{{ form.email.label }}</div>
+                        <div>{{ form.email }}</div>
                     </div>
                     <div class="mb-3">
-                        <label for="registrationPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="registrationPassword" placeholder="super strong password">
+                        <div>{{ form.password.label }}</div>
+                        <div>{{ form.password }}</div>
                     </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="agreement">
-                        <label class="form-check-label" for="agreement">
-                            {{ form.agreement.label }}
-                        </label>
+                    <div class="mb-3">
+                        {{ form.agreement.label }}
+                        {{ form.agreement }}
                     </div>
                     <button type="submit" class="btn btn-secondary">Sign In</button>
                 </form>

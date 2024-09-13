@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .forms import RegistrationForm
 
+import psycopg2
 
 def login_page(request):
 
@@ -10,15 +11,16 @@ def login_page(request):
 
 def registration_page(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST) #TODO форма приходит с ошибками
-
+        form = RegistrationForm(request.POST)
 
         if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            print(username, email, password)
-            return 200
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            agreement = request.POST.get('agreement')
+            print('AFTER', username, email, password, agreement)
+            return render(request, 'login-page.html')
+        # TODO Подключить PostgreSQL
 
     else:
         form = RegistrationForm()
