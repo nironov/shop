@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="page-checkout">
+    <nav id="main-nav" class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                        <a class="nav-link" href="#">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Инфо</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакты</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Личный кабинет</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-people-fill"></i> Вход
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Войти</a></li>
+                            <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Забыли пароль</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="bi bi-cart"></i> Корзина <span class="badge bg-secondary">5</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content">
+        <main id="main">
+            <div class="py-5 mb-4 text-center bg-secondary-subtle">
+                <div class="container">
+                    <h1 class="display-4">Оформление заказа</h1>
+                </div>
+            </div>
+
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                        <div class="table-responsive">
+                            <div class="h3">Ваш заказ:</div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Товар</th>
+                                        <th scope="col" class="text-center">Кол-во</th>
+                                        <th scope="col" class="text-center">Цена</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <th scope="row">1</th>
+                                        <td>
+                                            <div class="h5">Длинное название Товара 1</div>
+                                        </td>
+                                        <td class="text-center" style="width: 90px;">2</td>
+                                        <td class="text-center">
+                                            <div class="fw-bold text-nowrap">$10 000</div>
+                                        </td>
+                                    </tr>
+                                    <tr class="align-middle">
+                                        <th scope="row">2</th>
+                                        <td>
+                                            <div class="h5">Длинное название Товара 2</div>
+                                        </td>
+                                        <td class="text-center" style="width: 90px;">2</td>
+                                        <td class="text-center">
+                                            <div class="fw-bold text-nowrap">$10 000</div>
+                                        </td>
+                                    </tr>
+                                    <tr class="align-middle">
+                                        <th scope="row">3</th>
+                                        <td>
+                                            <div class="h5">Длинное название Товара 3</div>
+                                        </td>
+                                        <td class="text-center" style="width: 90px;">2</td>
+                                        <td class="text-center">
+                                            <div class="fw-bold text-nowrap">$10 000</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 text-end">
+                                <div class="h3">Итого:</div>
+                                <div class="text-decoration-line-through">30 000</div>
+                                <div class="h4">27 000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <form method="post">
+                            <div class="bg-light-subtle rounded p-3">
+                                <div class="h3">Способ оплаты</div>
+                                <div class="mb-4">
+                                    <select name="payment" class="form-select">
+                                        <option selected disabled>Выберите способ оплаты</option>
+                                        <option value="1">Наличными курьеру</option>
+                                        <option value="2">Перевод на банковскую карту</option>
+                                    </select>
+                                </div>
+
+                                <div class="h3">Способ доставки</div>
+                                <div class="mb-4">
+                                    <select name="shipment" class="form-select">
+                                        <option selected disabled>Выберите способ доставки</option>
+                                        <option value="1">Самовывоз</option>
+                                        <option value="2">Курьером</option>
+                                        <option value="3">Почта России</option>
+                                        <option value="4">Транспортная компания</option>
+                                    </select>
+                                </div>
+
+                                <div class="h3">Данные покупателя</div>
+                                <div class="mb-2">
+                                    <label for="personal-info" class="form-label">ФИО <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="personal-info" name="personal-info" placeholder="Иванов Иван Иванович">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="phone" class="form-label">Номер телефона <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="+79991230055">
+                                </div>
+
+                                <div class="h3">Доставка</div>
+                                <div class="mb-2">
+                                    <label for="city" class="form-label">Страна <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Россия">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="city" class="form-label">Город <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Москва">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="city" class="form-label">Адрес <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Улица, дом, квартира">
+                                    <div class="form-text">
+                                        ул. Ленина 8, кв 14
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="order-comment">Комментарий к заказу</label>
+                                    <textarea id="order-comment" class="form-control" name="order-comment" cols="35" rows="3"></textarea>
+                                    <div class="form-text">
+                                        Укажите дополнительную информацию к вашему заказу
+                                    </div>
+                                </div>
+                                <div class="mt-4 text-end">
+                                    <button type="submit" class="btn btn-success btn-lg">Оформить заказ</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer id="footer" class="py-3 bg-body-tertiary">
+        <div class="container text-center">
+            &copy; 2024
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        Fancybox.bind()
+    </script>
+</body>
+</html>
+
