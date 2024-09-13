@@ -11,7 +11,7 @@ def login_page(request):
 def registration_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST) #TODO форма приходит с ошибками
-        # print(form)
+
 
         if form.is_valid():
             username = form.cleaned_data['username']
