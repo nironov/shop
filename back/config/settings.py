@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django_unused_media',
 
     'apps.core',
+    'apps.login'
 ]
 
 MIDDLEWARE = [
@@ -57,10 +59,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+FRONT_TEMPLATES_ROOT = 'C:/Users/admin/Desktop/shop/front/templates'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            FRONT_TEMPLATES_ROOT
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +131,8 @@ STATIC_ROOT = Path(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media')
+
+
 
 
 # Default primary key field type

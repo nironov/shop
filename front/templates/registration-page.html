@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    REGISTRATION PAGE
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <div>{{ form.username.label }}</div>
+                        <div>{{ form.username }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <div>{{ form.email.label }}</div>
+                        <div>{{ form.email }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <div>{{ form.password.label }}</div>
+                        <div>{{ form.password }}</div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.agreement.label }}
+                        {{ form.agreement }}
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
