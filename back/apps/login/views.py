@@ -39,7 +39,7 @@ def registration_page(request):
             email = request.POST.get('email')
             password: str = request.POST.get('password')
             agreement = request.POST.get('agreement')
-            form.send_confirmation_email()
+            form.send_confirmation_email(username, email)
             cur.execute(f"INSERT INTO users (username, password, email) VALUES ('{username}', '{password}', '{email}')")
             conn.commit()
             return render(request, 'login-page.html')
