@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import RegistrationForm, LoginForm
+from .utils import validate_jwt_token, check_user_exists_in_db
 
 import psycopg2
+import jwt
 
 
 conn = psycopg2.connect('dbname=shopdb user=postgres password=123')
@@ -39,13 +41,30 @@ def registration_page(request):
             email = request.POST.get('email')
             password: str = request.POST.get('password')
             agreement = request.POST.get('agreement')
+            user = check_user_exists_in_db(username, email)
+            print('USER FUNC', user)
+            # TODO Корректно  выполнить проверку юзера
+            if not user['exists']:
+                return redirect('login_page', {'form':form, 'message': user['message']})
+
             form.send_confirmation_email(username, email)
             cur.execute(f"INSERT INTO users (username, password, email) VALUES ('{username}', '{password}', '{email}')")
             conn.commit()
             return render(request, 'login-page.html')
 
-    else:
-        form = RegistrationForm()
-        cur.execute('select * from users;')
-        print(cur.fetchall())
+    if request.method == 'GET':
+        if request.GET.get('token'):
+            jwt_token = request.GET.get('token')
+            if validate_jwt_token(jwt_token):
+                return render(request, 'index.html')
+            form = RegistrationForm()
+            return render(request, 'registration-page.html', {'form':form, 'message':'link is expired'})
+        else:
+            form = RegistrationForm()
+            cur.execute('select * from users;')
+            print(cur.fetchall())
     return render(request, 'registration-page.html', {'form':form})
+
+
+def registration_confirmation_page(request):
+    return render(request, 'index.html')

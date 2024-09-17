@@ -13,7 +13,7 @@ class RegistrationForm(forms.Form):
 
 
     def send_confirmation_email(self, username, email):
-        send_confirmation_email_task.delay(username, email)
+        send_confirmation_email_task(username, email)
 
 
 

@@ -153,7 +153,8 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 
 SERVER_EMAIL = 'admin@inbox.ru'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = os.getenv('FROM_EMAIL')
+# DEFAULT_FROM_EMAIL = os.getenv('FROM_EMAIL')
+DEFAULT_FROM_EMAIL = 'nironovv@inbox.ru'
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_USE_TLS = True
 DEFAULT_EMAIL_SMTP_PORT = 465
