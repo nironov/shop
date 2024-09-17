@@ -21,15 +21,19 @@ def validate_jwt_token(token):
 conn = psycopg2.connect('dbname=shopdb user=postgres password=123')
 cur = conn.cursor()
 
-def check_user_exists_in_db(username, email):
-    user = cur.execute(f"select * from users where username = '{username}'")
+def check_user_exists_in_db(username, email=None):
+    user = cur.execute(f"SELECT * FROM users WHERE username = '{username}'")
+    exists = cur.fetchone()
     # email_exists = cur.execute(f"select * from users where email = '{email}'")
     result = {}
-    print('USER', user)
-    if not user:
+    print('USER TYPE', user, type(user))
+    print('USER', exists)
+    if exists is None:
         return {'exists': False}
 
     result['exists'] = True
-    result['message'] = f'User {user[1]} already registered'
+    result['username'] = exists[1]
+    result['password'] = exists[2]
+    result['message'] = f'User {exists[1]} already registered'
     print('RESULT', result)
     return result

@@ -7,6 +7,9 @@
             <div class="col-4">
                 <form method="POST">
                     {% csrf_token %}
+                    {% if message %}
+                        {{ message }}
+                    {% endif %}
                     <div class="mb-3">
                         <div>{{ form.username.label }}</div>
                         <div>{{ form.username }}</div>

@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
 
 from .forms import RegistrationForm, LoginForm
-from .utils import validate_jwt_token, check_user_exists_in_db
+from .utils import cur, conn, validate_jwt_token, check_user_exists_in_db
 
 import psycopg2
 import jwt
 
 
-conn = psycopg2.connect('dbname=shopdb user=postgres password=123')
-cur = conn.cursor()
 
 
 def login_page(request):
@@ -18,14 +16,16 @@ def login_page(request):
         if form.is_valid():
             username: str = request.POST.get('username')
             password: str = request.POST.get('password')
-            cur.execute(f"select * from users where username = '{username}'")
-            password_from_db = cur.fetchone() # (6, 'user2', '333444', 'user2@gmail.com') <class 'tuple'>
-
-            if password == password_from_db[2]:
-                print('LOGIN ACCEPTED')
-                return render(request, 'registration-page.htmL')
+            user = check_user_exists_in_db(username) # (6, 'user2', '333444', 'user2@gmail.com') <class 'tuple'>
+            print('USER LOGIN PAGE', user)
+            if not user['exists']:
+                return render(request, 'login-page.html', {'form':form, 'message':f'There is no user with username: {username}'})
             else:
-                print('ACCESS DENIED')
+                if password == user['password']:
+                    print('LOGIN ACCEPTED')
+                    return redirect('index')
+                else:
+                    print('ACCESS DENIED')
 
     if request.method == 'GET':
         form = LoginForm()
@@ -43,14 +43,13 @@ def registration_page(request):
             agreement = request.POST.get('agreement')
             user = check_user_exists_in_db(username, email)
             print('USER FUNC', user)
-            # TODO Корректно  выполнить проверку юзера
-            if not user['exists']:
-                return redirect('login_page', {'form':form, 'message': user['message']})
-
-            form.send_confirmation_email(username, email)
-            cur.execute(f"INSERT INTO users (username, password, email) VALUES ('{username}', '{password}', '{email}')")
-            conn.commit()
-            return render(request, 'login-page.html')
+            if user['exists']:
+                return render(request, 'registration-page.html', {'form':form, 'message': f'user {username} already taken'})
+            else:
+                form.send_confirmation_email(username, email)
+                cur.execute(f"INSERT INTO users (username, password, email) VALUES ('{username}', '{password}', '{email}')")
+                conn.commit()
+                return render(request, 'index.html')
 
     if request.method == 'GET':
         if request.GET.get('token'):

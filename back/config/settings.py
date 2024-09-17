@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'apps.core',
     'apps.login',
+    'apps.main_page',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = Path(BASE_DIR, 'static')
+
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media')
