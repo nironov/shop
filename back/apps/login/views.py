@@ -20,12 +20,14 @@ def login_page(request):
             print('USER LOGIN PAGE', user)
             if not user['exists']:
                 return render(request, 'login-page.html', {'form':form, 'message':f'There is no user with username: {username}'})
+
+            if password == user['password']:
+                print('LOGIN ACCEPTED')
+                return redirect('index')
             else:
-                if password == user['password']:
-                    print('LOGIN ACCEPTED')
-                    return redirect('index')
-                else:
-                    print('ACCESS DENIED')
+                print('ACCESS DENIED')
+                return render(request, 'login-page.html', {'form':form, 'message':f'either username or password is invalid'})
+
 
     if request.method == 'GET':
         form = LoginForm()
@@ -42,13 +44,17 @@ def registration_page(request):
             password: str = request.POST.get('password')
             agreement = request.POST.get('agreement')
             user = check_user_exists_in_db(username, email)
-            print('USER FUNC', user)
+
             if user['exists']:
                 return render(request, 'registration-page.html', {'form':form, 'message': f'user {username} already taken'})
+
             else:
                 form.send_confirmation_email(username, email)
                 cur.execute(f"INSERT INTO users (username, password, email) VALUES ('{username}', '{password}', '{email}')")
                 conn.commit()
+                # Перенаправлять юзера на страницу заглушку в ожидании подтверждения email
+                # ИЛИ
+                # Дать доступ к приложению, но требовать подтверждения email
                 return render(request, 'index.html')
 
     if request.method == 'GET':
@@ -58,12 +64,9 @@ def registration_page(request):
                 return render(request, 'index.html')
             form = RegistrationForm()
             return render(request, 'registration-page.html', {'form':form, 'message':'link is expired'})
+
         else:
             form = RegistrationForm()
-            cur.execute('select * from users;')
-            print(cur.fetchall())
     return render(request, 'registration-page.html', {'form':form})
 
 
-def registration_confirmation_page(request):
-    return render(request, 'index.html')

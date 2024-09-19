@@ -1,3 +1,4 @@
+{% extends 'main.html' %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,57 +10,9 @@
     <link rel="stylesheet" href="admin/css/styles.css'">
 </head>
 <body class="homepage">
-    <nav id="main-nav" class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-                        <a class="nav-link active" href="#">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Инфо</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Товары</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Контакты</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Личный кабинет</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-people-fill"></i> Вход
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Войти</a></li>
-                            <li><a class="dropdown-item" href="#">Регистрация</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Забыли пароль</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-cart"></i> Корзина <span class="badge bg-secondary">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    {% block navbar %}
+        {{ block.super }}
+    {% block content %}
     <div id="content">
         <div id="carouselExampleCaptions" class="carousel slide">
             <div class="carousel-indicators">
@@ -188,6 +141,8 @@
             </section>
         </main>
     </div>
+    {% endblock content %}
+    {% endblock navbar %}
 
     <footer id="footer" class="py-3 bg-body-tertiary">
         <div class="container text-center">
