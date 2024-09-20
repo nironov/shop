@@ -1,7 +1,6 @@
 import jwt
 import time
-import psycopg2
-
+from apps.core.postgresql_connection import cur
 
 def generate_jwt_token():
     unix_time_now = int(time.time())
@@ -18,8 +17,6 @@ def validate_jwt_token(token):
     return False
 
 
-conn = psycopg2.connect('dbname=shopdb user=postgres password=123')
-cur = conn.cursor()
 
 def check_user_exists_in_db(username, email=None):
     user = cur.execute(f"SELECT * FROM users WHERE username = '{username}'")
@@ -37,3 +34,4 @@ def check_user_exists_in_db(username, email=None):
     result['message'] = f'User {exists[1]} already registered'
     print('RESULT', result)
     return result
+

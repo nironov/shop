@@ -1,12 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .forms import RegistrationForm, LoginForm
-from .utils import cur, conn, validate_jwt_token, check_user_exists_in_db
-
-import psycopg2
-import jwt
-
-
+from .utils import validate_jwt_token, check_user_exists_in_db
 
 
 def login_page(request):
