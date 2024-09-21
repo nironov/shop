@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 
 from .forms import RegistrationForm, LoginForm
 from .utils import validate_jwt_token, check_user_exists_in_db
+from apps.core.postgresql_connection import cur, conn
 
 
 def login_page(request):
