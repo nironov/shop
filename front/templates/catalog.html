@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <div class="row">
                 <main id="main" class="col-12 col-lg-9 order-1 order-lg-2 mb-4 mb-lg-0">
-                    <div class="row row-cols-2 row-cols-lg-3 gy-4">
+                    <!-- <div class="row row-cols-2 row-cols-lg-3 gy-4">
                         <div class="product-teaser col">
                             <div class="product-teaser__inner">
                                 <div class="position-relative" title="перейти на страницу товара">
@@ -218,13 +218,16 @@
                                 </div>
                             </div>
                         </div>
+                    </div> -->
 
+
+                    <div class="row row-cols-2 row-cols-lg-3 gy-4">
                         {% for product in products %}
-                            <div class="product-teaser col"></div>
+                            <div class="product-teaser col">
                                 <div class="product-teaser__inner">
                                     <div class="position-relative" title="перейти на страницу товара">
                                         <div class="product-teaser__img">
-                                            <img src="https://placehold.co/300x300" alt="">
+                                            <img src="https://placehold.co/250x250" alt="">
                                         </div>
                                         <div class="product-teaser__name my-3">
                                             <a href="{% url 'product_page' product.0 %}" class="stretched-link">
@@ -233,7 +236,7 @@
                                         </div>
                                     </div>
                                     <div class="product-teaser__price">
-                                        5000$
+                                        ${{ product.2 }}
                                     </div>
                                     <div class="product-teaser__add-to-cart mt-2">
                                         <button class="btn btn-success">To Cart</button>
@@ -243,7 +246,8 @@
                         {% endfor %}
                     </div>
 
-                    <nav class="my-5" aria-label="Page navigation">
+                    <!-- <nav class="my-5" aria-label="Page navigation">
+
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
                                 <a class="page-link">Previous</a>
@@ -261,7 +265,24 @@
                                 <a class="page-link" href="#">Next</a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if products.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ products.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                            </span>
+
+                            {% if products.has_next %}
+                                <a href="?page={{ products.next_page_number }}">next</a>
+                                <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
                 </main>
 
                 <aside id="left-sidebar" class="col-12 col-lg-3 order-2 order-lg-1">
