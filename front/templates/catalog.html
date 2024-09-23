@@ -13,6 +13,7 @@
 <body class="page-catalog">
 
     <div id="content">
+        {{ msg }}
         <div class="py-5 text-center bg-secondary-subtle">
             <div class="container">
                 <h1 class="display-4">Товары</h1>
@@ -268,8 +269,9 @@
                     </nav> -->
                     <div class="pagination">
                         <span class="step-links">
+                            {{ request.get_full_path }}
                             {% if products.has_previous %}
-                                <a href="?page=1">&laquo; first</a>
+                                <a href="{{ request.get_full_path }}?page=1">&laquo; first</a>
                                 <a href="?page={{ products.previous_page_number }}">previous</a>
                             {% endif %}
 
@@ -278,7 +280,7 @@
                             </span>
 
                             {% if products.has_next %}
-                                <a href="?page={{ products.next_page_number }}">next</a>
+                                <a href="{{ view.path_without_page }}?page={{ products.next_page_number }}">next</a>
                                 <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
                             {% endif %}
                         </span>
