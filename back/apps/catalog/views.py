@@ -5,6 +5,7 @@ from django.views import View
 import asyncio
 
 from apps.core.postgresql_connection import cur
+from .queries import get_filtered_products_from_db
 
 # def catalog_page(request):
 #     if request.method == 'GET':
@@ -65,25 +66,18 @@ class CatalogPageView(View):
         qty_per_page = request.GET.get('quantity')
         paginator = Paginator(all_products, 10)
         products = paginator.get_page(page_number)
-        # TODO: сформировать корректную url строку для get запроса с учетом фильтров
         context = {
             'msg': 'thisis message'
         }
         filters = dict(request.GET) # {'price-min': ['105'], 'price-max': ['515'], 'category': ['all'], 'brands': ['all'], 'quantity': ['9']}
         if not filters:
             print('NOT FILTERS', request.GET)
+            context['products'] = products
             return render(request, self.template_name, context)
 
         else:
-            print('FILTERS', request.GET)
-            print('FILTERS', request.get_full_path())
-            path: list = request.get_full_path().split('&')
-            # r = dict(request.GET).pop('page')
-            # print(r)
-            print(type(path), path.pop())
-            print('JOINED PATH', '&'.join(path))
-
-            context['products'] = products
+            # TODO: не доходит запрос к БД
+            filtered_products = get_filtered_products_from_db(filters)
+            print('FILTERED', filtered_products)
+            context['products'] = filtered_products
             return render(request, self.template_name, context)
-        context['products'] = products
-        return render(request, self.template_name, context)
