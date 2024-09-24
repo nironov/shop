@@ -8,9 +8,9 @@ from apps.core.postgresql_connection import cur
 from .queries import get_filtered_products_from_db, get_product_by_search
 
 
-def product_page(request, product_id):
+# def product_page(request, product_id):
 
-    return render(request, 'product_page.html')
+#     return render(request, 'product_page.html')
 
 def add_to_cart(request):
     pass
@@ -26,7 +26,6 @@ class CatalogPageView(View):
         page_number = request.GET.get('page')
         qty_per_page = request.GET.get('quantity')
         paginator = Paginator(all_products, 9)
-        print('QTYPER', type(qty_per_page), qty_per_page)
         context = {}
 
         filters: dict = dict(request.GET) # {'price-min': ['105'], 'price-max': ['515'], 'category': ['all'], 'brands': ['all'], 'quantity': ['9']}
@@ -40,11 +39,9 @@ class CatalogPageView(View):
 
         if not filters or len(filters) == 1:
             if filters.get('q'):
-                print('Q IN FILTERS')
                 product = get_product_by_search(filters['q'][0])
                 context['product'] = product
                 return render(request, self.template_name, context)
-            print('NOTHING')
             products = paginator.get_page(page_number)
             context['products'] = products
             return render(request, self.template_name, context)
