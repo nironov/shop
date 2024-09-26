@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.views import View
+from django.core.cache import cache
 
 import asyncio
 
@@ -27,6 +28,8 @@ class CatalogPageView(View):
         qty_per_page = request.GET.get('quantity')
         paginator = Paginator(all_products, 9)
         context = {}
+
+        # print('CACHED VALUE', cache.get('my_key'))
 
         filters: dict = dict(request.GET) # {'price-min': ['105'], 'price-max': ['515'], 'category': ['all'], 'brands': ['all'], 'quantity': ['9']}
 

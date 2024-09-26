@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'solo.apps.SoloAppConfig',
     'django_unused_media',
+    'django_celery_beat',
+    'django_celery_results',
 
     'apps.core',
     'apps.login',
@@ -167,6 +169,15 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
 
 
 SERVER_EMAIL = 'admin@inbox.ru'
