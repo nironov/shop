@@ -158,16 +158,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 
-CELERY_BEAT_SCHEDULE = {
-    'analyze_products_views-every-10-seconds': {
-        'task': 'apps.product.tasks.analyze_products_views',
-        'schedule': 10.0,
-        'args': ['ids'],
+# CELERY_BEAT_SCHEDULE = {
+#     'analyze_products_views-every-10-seconds': {
+#         'task': 'apps.product.tasks.analyze_products_views',
+#         'schedule': 10.0,
+        # 'args': ['qwerty'],
         # 'options': {
         #     'expires': 5.0,
         # },
-    },
-}
+#     },
+# }
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
