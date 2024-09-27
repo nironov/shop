@@ -24,11 +24,9 @@ class ProductPageView(View):
     def count_product_views(self, request):
         product_id = int(request.path.split('/')[-1])
         self.counts.append(product_id)
-        print('FROM QWE', self.counts)
 
         if len(self.counts) == 10:
             analyze_products_views_by_ids(self.counts)
-
             self.counts.clear()
 
 
