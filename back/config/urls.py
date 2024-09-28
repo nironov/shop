@@ -28,6 +28,8 @@ urlpatterns = [
     path('', include('apps.catalog.urls')),
     path('', include('apps.product.urls')),
 
+    path('', include('apps.analyze_products.urls')),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

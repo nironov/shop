@@ -31,6 +31,6 @@ class ProductPageView(View):
 
 
     def get(self, request, product_id):
-        self.ids = self.count_product_views(request)
+        # self.ids = self.count_product_views(request)
         return render(request, 'product_page.html')
 

@@ -5,6 +5,13 @@ from apps.core.postgresql_connection import cur, conn
 from celery import shared_task
 import json
 
+import redis
+red = redis.Redis()
+# red.set('my_key', 'value of my key in redis')
+# print(red.get('cli_key'))
+
+
+
 
 results = {}
 
@@ -19,6 +26,7 @@ def analyze_products_views_by_ids(ids):
         results['ids'][f'{id}'] = ids.count(id)
     print('ANALYZE IDS', results)
 
-    ids_json = json.dumps(results)
-    cur.execute(f"insert into productsviews (ids) values ('{ids_json}')")
-    conn.commit()
+    # ids_json = json.dumps(results)
+    # cur.execute(f"insert into productsviews (ids) values ('{ids_json}')")
+    # conn.commit()
+    #
