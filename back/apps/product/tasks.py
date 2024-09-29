@@ -16,17 +16,26 @@ red = redis.Redis()
 results = {}
 
 @shared_task
-def analyze_products_views_by_ids(ids):
+def put_viewed_products_in_db(ids):
     results = {}
-    results['time'] = datetime.now(timezone.utc).now().isoformat()
-    results['ids'] = {}
+    # results['time'] = datetime.now(timezone.utc).now().isoformat()
+    results['data'] = {}
+    # time = datetime.now(timezone.utc).now().isoformat()
+    time = datetime.today()
+    print('TIME', time)
 
     unique_ids = set(ids)
     for id in unique_ids:
-        results['ids'][f'{id}'] = ids.count(id)
+        results['data'][f'{id}'] = ids.count(id)
     print('ANALYZE IDS', results)
 
-    # ids_json = json.dumps(results)
-    # cur.execute(f"insert into productsviews (ids) values ('{ids_json}')")
-    # conn.commit()
-    #
+    ids_json = json.dumps(results)
+
+    # getting id of last record
+    cur.execute('select id from products_data order by id desc')
+    last_id = cur.fetchone()[0]
+
+    # insert new data to DB
+    cur.execute(f"insert into products_data (id, created_at, data, is_checked) values ({last_id + 1}, '{time}', '{ids_json}', False)")
+    conn.commit()
+

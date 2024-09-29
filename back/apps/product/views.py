@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 import json
 import os
 
-from .tasks import analyze_products_views_by_ids
+from .tasks import put_viewed_products_in_db
 
 
 ten_seconds = datetime.now(timezone.utc) + timedelta(seconds=10)
@@ -24,13 +24,13 @@ class ProductPageView(View):
     def count_product_views(self, request):
         product_id = int(request.path.split('/')[-1])
         self.counts.append(product_id)
-
+        # исполнять эту проверку раз в сутки
         if len(self.counts) == 10:
-            analyze_products_views_by_ids(self.counts)
+            put_viewed_products_in_db(self.counts)
             self.counts.clear()
 
 
     def get(self, request, product_id):
-        # self.ids = self.count_product_views(request)
+        self.ids = self.count_product_views(request)
         return render(request, 'product_page.html')
 
