@@ -25,7 +25,7 @@ class ProductPageView(View):
         product_id = int(request.path.split('/')[-1])
         self.counts.append(product_id)
         # исполнять эту проверку раз в сутки
-        if len(self.counts) == 10:
+        if len(self.counts) == 15:
             put_viewed_products_in_db(self.counts)
             self.counts.clear()
 
