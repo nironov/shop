@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+
+
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +31,7 @@ SECRET_KEY = 'django-insecure-bw8wj_hc2-fj6nue77@n&0fpz633juhc+t6q14ga(7a#x83arq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,9 +47,17 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'solo.apps.SoloAppConfig',
     'django_unused_media',
+    'django_celery_beat',
+    'django_celery_results',
+
+    'rest_framework',
 
     'apps.core',
-    'apps.login'
+    'apps.login',
+    'apps.main_page',
+    'apps.catalog',
+    'apps.product',
+    'apps.analyze_products'
 ]
 
 MIDDLEWARE = [
@@ -127,7 +140,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = Path(BASE_DIR, 'static')
+# STATIC_ROOT = Path(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media')
@@ -139,3 +156,38 @@ MEDIA_ROOT = Path(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+# CELERY_BEAT_SCHEDULE = {
+#     'analyze_products_views-every-10-seconds': {
+#         'task': 'apps.product.tasks.analyze_products_views',
+#         'schedule': 10.0,
+        # 'args': ['qwerty'],
+        # 'options': {
+        #     'expires': 5.0,
+        # },
+#     },
+# }
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+
+SERVER_EMAIL = 'admin@inbox.ru'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = os.getenv('FROM_EMAIL')
+DEFAULT_FROM_EMAIL = 'nironovv@inbox.ru'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_USE_TLS = True
+DEFAULT_EMAIL_SMTP_PORT = 465
+EMAIL_HOST_PASSWORD = os.getenv('MAIL_PASSWORD')

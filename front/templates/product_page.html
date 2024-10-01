@@ -1,3 +1,4 @@
+{% extends 'main.html' %}
 <!DOCTYPE html>
 <html lang="ru" data-bs-theme="dark">
 <head>
@@ -10,57 +11,10 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body class="page-product">
-    <nav id="main-nav" class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-                        <a class="nav-link" href="#">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Инфо</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Товары</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Контакты</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Личный кабинет</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-people-fill"></i> Вход
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Войти</a></li>
-                            <li><a class="dropdown-item" href="#">Регистрация</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Забыли пароль</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-cart"></i> Корзина <span class="badge bg-secondary">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    {% block navbar %}
+        {{ block.super }}
+    {% endblock navbar %}
+    {% block content %}
     <div id="content">
         <main id="main">
             <div class="py-5 mb-4 text-center bg-secondary-subtle">
@@ -74,57 +28,31 @@
                     <div class="col-12 col-lg-7 mb-4 mb-lg-0">
                         <div id="product-main-image" class="mb-3">
                             <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
+                                <!-- <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt=""> -->
+                                <img src="https://placehold.co/500x500" alt="">
                             </a>
                         </div>
 
-                        <div id="product-images" class="row row-cols-4 g-3">
+                        <!-- <div id="product-images" class="row row-cols-4 g-3">
                             <div class="product-image__small col">
                                 <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
                                     <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
+                                    <img src="https://placehold.co/300x300" alt="">
                                 </a>
                             </div>
                             <div class="product-image__small col">
                                 <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
                                     <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
+                                    <img src="https://placehold.co/300x300" alt="">
                                 </a>
                             </div>
                             <div class="product-image__small col">
                                 <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
                                     <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
+                                    <img src="https://placehold.co/300x300" alt="">
                                 </a>
                             </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-image__small col">
-                                <a href="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
-                                    <img src="https://wallpapers.com/images/featured/ultra-hd-wazf67lzyh5q7k32.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-12 col-lg-5">
@@ -310,6 +238,7 @@
             </div>
         </section>
     </div>
+    {% endblock content %}
 
     <footer id="footer" class="py-3 bg-body-tertiary">
         <div class="container text-center">

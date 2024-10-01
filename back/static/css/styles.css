@@ -12,6 +12,10 @@ body {
     /* display: block; */
 }
 
+#block-content {
+    padding-top: 56px;
+}
+
 #footer {
     margin-top: 30px;
 }
