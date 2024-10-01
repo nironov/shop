@@ -19,6 +19,7 @@ i = [2, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 
 
 
 class ProductPageView(View):
+    template_name = 'product_page.html'
     counts = []
 
     def count_product_views(self, request):
@@ -32,5 +33,5 @@ class ProductPageView(View):
 
     def get(self, request, product_id):
         self.ids = self.count_product_views(request)
-        return render(request, 'product_page.html')
+        return render(request, self.template_name)
 

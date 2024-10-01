@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.views import View
-from django.core.cache import cache
-
-import asyncio
 
 from apps.core.postgresql_connection import cur
 from .queries import get_filtered_products_from_db, get_product_by_search
