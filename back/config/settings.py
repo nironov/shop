@@ -162,13 +162,10 @@ CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 
 # CELERY_BEAT_SCHEDULE = {
-#     'analyze_products_views-every-10-seconds': {
-#         'task': 'apps.product.tasks.analyze_products_views',
-#         'schedule': 10.0,
-        # 'args': ['qwerty'],
-        # 'options': {
-        #     'expires': 5.0,
-        # },
+#     'put viewed products in db': {
+#         'task': 'apps.product.tasks.put_viewed_products_in_db',
+#         'schedule': 20.0,
+#         'args': ['args']
 #     },
 # }
 

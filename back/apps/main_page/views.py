@@ -16,9 +16,10 @@ class IndexPageView(View):
         # из другой функции получать обьект, который содержит популярные товары
         q_products = get('http://127.0.0.1:8000/api/get_data', data={'get_popular_products': True}).json()
         print('PRODUCTS INDEX PAGE GET', q_products['data'], type(q_products['data']))
+
         products = []
-        # передать словари с инфо о продуктах в одном массиве, чтобы итерироваться по нему в шаблоне
-        for p in q_products['data']:
-            products.append(p)
-        print('PRODUCTS IN LIST', products)
+
+        for product in q_products['data']:
+            products.append(product)
+        print('JUST PRODUCTS', products)
         return render(request, self.template_name, {'products': products})

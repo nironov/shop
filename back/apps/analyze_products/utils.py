@@ -12,8 +12,8 @@ def get_ids_from_db():
     try:
         cur.execute('select * from products_data where is_checked = False')
         data = cur.fetchone()
-        cur.execute(f"update products_data set is_checked = True where id = {data[0]}")
-        conn.commit()
+        # cur.execute(f"update products_data set is_checked = True where id = {data[0]}")
+        # conn.commit()
         print(data[2], type(data[2]))
         return data
     except Exception as e:
@@ -33,10 +33,12 @@ def get_most_viewed_products_by_id() -> list[(tuple, tuple)]:
     sorted_ids_list = [(k, v) for k, v in sorted(products_ids.items(), key=lambda item: item[1])]
 
     # [('3', 2), ('7', 2), ('4', 3), ('1', 5)]
-    four_most_popular_products = sorted_ids_list[-4:]
+    # four_most_popular_products = sorted_ids_list[-4:]
+    # most_popular_products = sorted_ids_list
+    # print('FOUR MOST POPULAR', four_most_popular_products)
 
     most_viewed_products = [] # list[(tuple), (tuple), ...]
-    for product_id in four_most_popular_products:
+    for product_id in sorted_ids_list:
         cur.execute(f'select * from products where id = {product_id[0]}')
         most_viewed_products.append(cur.fetchone())
     print('POPULAR PRODUCTS', most_viewed_products)
@@ -63,6 +65,8 @@ def popular_products_in_list() -> list[dict]:
 
 
     red.set('products_data', pickle.dumps(data_in_list))
+    cur.execute(f"update products_data set is_checked = True where id = {data[0]}")
+    conn.commit()
 
     """
         data_in_list
